@@ -11,14 +11,17 @@ public:
     T &operator*();
     iterator operator+(int n);
     // zht does not require the followings, make him happy.
-    // iterator& operator++();
+    // NOOOOOOOOOOOOO!
+    iterator& operator++();
+    bool operator==(const iterator &another) const;
+    bool operator!=(const iterator &another) const;
     // iterator operator++(int);
   private:
     // add your data and function here
   };
   iterator begin();
   iterator end();
-  size_t size();
+  size_t size() const;
   void push_back(const T &item);
   void pop_back();
   void erase(iterator iter);

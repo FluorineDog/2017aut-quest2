@@ -1,4 +1,4 @@
-# 2017 秋季 Lab 组第 2 期新人任务
+# 2017 秋季 Lab 组第 2 期新人任务 C++ Edition
 
 > There are some boring things you always have to get through.
 >
@@ -6,7 +6,7 @@
 
 ## Introduction
 
-本期任务的目的是使你们熟悉基本的数据结构。
+本期任务的目的是使你们熟悉基本的数据结构和C++的使用。
 
 （emmm 好短！
 
@@ -28,9 +28,9 @@
 
 ## Specification
 
-限制语言为 `C/C++` 。
+限制语言为 `C++/C++1z` 。
 
-请 fork `git@github.com:klx3300/2017aut-quest2.git`
+请 fork `git@github.com:FluorineDog/2017aut-quest2.git`
 
 如果 `API` 出现问题请开 issue ，我会酌情进行修改。
 
