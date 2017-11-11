@@ -9,20 +9,23 @@ template <typename Key, typename Value, typename Hash = hash<Key>
 class unordered_map {
 public:
   unordered_map();
-  size_t size();
-  void insert(pair<Key, Value> kvpair);
+  size_t size() const;
+  void insert(::std::pair<Key, Value> kvpair);
   void clear();
   class iterator {
   public:
     // assume Key won't be modified
-    // actual priviledge control is hard
+    // actually priviledge controling is hard
     // since zht doesn't require it. Make him happy
-    pair<const Key, Value> &operator*();
+    ::std::pair<const Key, Value> &operator*();
     iterator operator++(int);
     iterator operator--(int);
     // prefix increment operator is not required by zht. Make him happy
-    // iterator &operator++();
-    // iterator &operator--();
+    // NO.
+    iterator &operator++();
+    iterator &operator--();
+    bool operator==(const iterator &another) const;
+    bool operator!=(const iterator &another) const;
   private:
     // add your data and function here
   };

@@ -5,14 +5,14 @@
 
 namespace Lab {
 
-template <typename T, typename Comp = Lab::less<T>> class priority_queue {
+template <typename value_t, typename Comp = Lab::less<value_t>> 
+class priority_queue {
 public:
   priority_queue();
-  int size();
-  void push(void *key, int size);
-  const T &top();
+  int size() const;
+  void push(const value_t &);
+  const value_t &top() const;
   void pop();
-  void clear();
   ~priority_queue();
 private:
   // add your data and function here

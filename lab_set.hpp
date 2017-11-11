@@ -7,16 +7,18 @@
 
 namespace Lab {
 template <typename T> class set {
+public:
   set();
-  int size();
+  int size() const;
   void insert(const T &item);
   class iterator {
+  public:
     const T &operator*();
     iterator operator++(int); // for iter++
     iterator operator--(int);
-    // prefix increment operator is not required by zht. Make him happy
-    // iterator &operator++();
-    // iterator &operator--();
+    iterator& operator++();
+    bool operator==(const iterator &another) const;
+    bool operator!=(const iterator &another) const;
   private:
     // add your data and function here
   };

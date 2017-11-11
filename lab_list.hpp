@@ -15,14 +15,15 @@ public:
     // make him unhappy
     iterator &operator++();
     iterator &operator--();
-
+    bool operator==(const iterator &another) const;
+    bool operator!=(const iterator &another) const;
   private:
     // add your data and function here
   };
 
   iterator begin();
   iterator end();
-  int size();
+  int size() const;
   void pop_front();
   void pop_back();
   void erase(iterator iter);
