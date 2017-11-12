@@ -22,22 +22,22 @@ unsigned int naive_hash(const void *data, int size) {
   return crc;
 }
 
-template <typename T> unsigned int hast_f(const T &s) {
+template <typename T> unsigned int hash_f(const T &s) {
   // optimised for base type
   // faster than pure naive_hash
   return naive_hash(&s, sizeof(s));
 }
 
 // the following is for speedups
-template <> unsigned int hast_f(const unsigned long long &s) {
+template <> unsigned int hash_f(const unsigned long long &s) {
   return _mm_crc32_u64(INIT_HASH_VALUE, s);
 }
 
-template <> unsigned int hast_f(const long long &s) {
+template <> unsigned int hash_f(const long long &s) {
   return _mm_crc32_u64(INIT_HASH_VALUE, s);
 }
 
-template <> unsigned int hast_f(const double &s) {
+template <> unsigned int hash_f(const double &s) {
   union {
     double f;
     unsigned long long i;
@@ -46,7 +46,7 @@ template <> unsigned int hast_f(const double &s) {
   return _mm_crc32_u64(INIT_HASH_VALUE, u.i);
 }
 
-template <> unsigned int hast_f(const float &s) {
+template <> unsigned int hash_f(const float &s) {
   union {
     float f;
     unsigned int i;
@@ -55,31 +55,31 @@ template <> unsigned int hast_f(const float &s) {
   return _mm_crc32_u32(INIT_HASH_VALUE, u.i);
 }
 
-template <> unsigned int hast_f(const unsigned &s) {
+template <> unsigned int hash_f(const unsigned &s) {
   return _mm_crc32_u32(INIT_HASH_VALUE, s);
 }
 
-template <> unsigned int hast_f(const int &s) {
+template <> unsigned int hash_f(const int &s) {
   return _mm_crc32_u32(INIT_HASH_VALUE, s);
 }
 
-template <> unsigned int hast_f(const unsigned short &s) {
+template <> unsigned int hash_f(const unsigned short &s) {
   return _mm_crc32_u16(INIT_HASH_VALUE, s);
 }
 
-template <> unsigned int hast_f(const short &s) {
+template <> unsigned int hash_f(const short &s) {
   return _mm_crc32_u16(INIT_HASH_VALUE, s);
 }
 
-template <> unsigned int hast_f(const signed char &s) {
+template <> unsigned int hash_f(const signed char &s) {
   return _mm_crc32_u8(INIT_HASH_VALUE, s);
 }
 
-template <> unsigned int hast_f(const unsigned char &s) {
+template <> unsigned int hash_f(const unsigned char &s) {
   return _mm_crc32_u8(INIT_HASH_VALUE, s);
 }
 
-template <> unsigned int hast_f(const char &s) {
+template <> unsigned int hash_f(const char &s) {
   return _mm_crc32_u8(INIT_HASH_VALUE, s);
 }
 ////////////////////////////////////////////////
