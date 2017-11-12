@@ -115,22 +115,29 @@ namespace rlib {
         dynamic_assert(equal_checker(bufA, bufB), "operation failed."); \
     } while(false)
 
-//vector
-#include "lab_vector.hpp"
-#include <vector>
-
-template<typename data_t>
-bool vector_equal(const Lab::vector<data_t> &vcta, const std::vector<data_t> &vctb)
+//iterable equal template
+template<class bufa_t, class bufb_t>
+bool iterable_equal(const bufa_t &bufa, const bufb_t &bufb)
 {
-    if(vcta.size() != vctb.size()) return false;
-    Lab::vector<data_t> &fake_vcta = const_cast<Lab::vector<data_t> &>(vcta);
-    for(auto ia = fake_vcta.begin(), ib = vctb.begin();
-        ia != fake_vcta.end() && ib != vctb.end();
+    if(bufa.size() != bufb.size()) return false;
+    bufa_t &fake_bufa = const_cast<bufa_t &>(bufa); //For fucking api.
+    for(auto ia = fake_bufa.begin(), ib = bufb.begin();
+        ia != fake_bufa.end() && ib != bufb.end();
         ++ia, ++ib)
         {
             if(*ia != *ib) return false;
         }
     return true;
+}
+
+//vector
+#include "lab_vector.hpp"
+#include <vector>
+
+template<typename data_t>
+inline bool vector_equal(const Lab::vector<data_t> &bufa, const std::vector<data_t> &bufb)
+{
+    return iterable_equal(bufa, bufb);
 }
 #define VECTOR_ASSERT_EQUIVALENCE(bufA, bufB, operation) ASSERT_EQUIVALENCE(bufA, bufB, operation, vector_equal)
 
@@ -139,17 +146,9 @@ bool vector_equal(const Lab::vector<data_t> &vcta, const std::vector<data_t> &vc
 #include <list>
 
 template<typename data_t>
-bool list_equal(const Lab::list<data_t> &bufa, const std::list<data_t> &bufb)
+inline bool list_equal(const Lab::list<data_t> &bufa, const std::list<data_t> &bufb)
 {
-    if(bufa.size() != bufb.size()) return false;
-    Lab::list<data_t> &fake_bufa = const_cast<Lab::list<data_t> &>(bufa);
-    for(auto ia = fake_bufa.begin(), ib = bufb.begin();
-        ia != fake_bufa.end() && ib != bufb.end();
-        ++ia, ++ib)
-        {
-            if(*ia != *ib) return false;
-        }
-    return true;
+    return iterable_equal(bufa, bufb);
 }
 #define LIST_ASSERT_EQUIVALENCE(bufA, bufB, operation) ASSERT_EQUIVALENCE(bufA, bufB, operation, list_equal)
 
@@ -158,17 +157,9 @@ bool list_equal(const Lab::list<data_t> &bufa, const std::list<data_t> &bufb)
 #include <set>
 
 template<typename data_t>
-bool set_equal(const Lab::set<data_t> &bufa, const std::set<data_t> &bufb)
+inline bool set_equal(const Lab::set<data_t> &bufa, const std::set<data_t> &bufb)
 {
-    if(bufa.size() != bufb.size()) return false;
-    Lab::set<data_t> &fake_bufa = const_cast<Lab::set<data_t> &>(bufa);
-    for(auto ia = fake_bufa.begin(), ib = bufb.begin();
-        ia != fake_bufa.end() && ib != bufb.end();
-        ++ia, ++ib)
-        {
-            if(*ia != *ib) return false;
-        }
-    return true;
+    return iterable_equal(bufa, bufb);
 }
 #define SET_ASSERT_EQUIVALENCE(bufA, bufB, operation) ASSERT_EQUIVALENCE(bufA, bufB, operation, set_equal)
 
