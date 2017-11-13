@@ -41,9 +41,16 @@ int main()
     using operation_t = void(op_args_t);
 
     auto co_insert = [](auto &bufa, auto &bufb){
-        auto val = m_rand();
+        data_t val = m_rand();
         bufa.insert(val);
         bufb.insert(val);
+    };
+
+    data_t current_value = 0;
+    auto co_particle_insert = [&current_value](auto &bufa, auto &bufb){
+        current_value += 1;
+        bufa.insert(current_value);
+        bufb.insert(current_value);
     };
 
     auto co_erase = [](auto &bufa, auto &bufb){
@@ -67,7 +74,8 @@ int main()
     TEST(1000, co_insert, "push3");
     TEST(543, co_erase, "erase2");
     TEST(2, co_clear, "clear1");
-    TEST(3456, co_insert, "push4");
+    TEST(3456, co_particle_insert, "PartiInsert1");
+    TEST(1000000, co_particle_insert, "PartiInsert2");
     println("All tests done.");
     return 0;
 }
