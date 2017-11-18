@@ -49,8 +49,9 @@ int main()
     };
 
     auto co_erase = [](auto &bufa, auto &bufb){
-        bufa.erase(++bufa.begin());
-        bufb.erase(++bufb.begin());
+        auto key_to_erase = (++bufb.begin()).first;
+        bufa.erase(bufa.find(key_to_erase));
+        bufb.erase(bufb.find(key_to_erase));
     };
 
     auto co_clear = [](auto &bufa, auto &bufb){
