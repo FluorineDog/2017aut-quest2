@@ -49,7 +49,7 @@ int main()
     };
 
     auto co_erase = [](auto &bufa, auto &bufb){
-        auto key_to_erase = (++bufb.begin()).first;
+        auto key_to_erase = (*++bufb.begin()).first;
         bufa.erase(bufa.find(key_to_erase));
         bufb.erase(bufb.find(key_to_erase));
     };
